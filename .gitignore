@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.egg-info/
+
+data/raw/*
+!data/raw/fallalld/
+data/raw/fallalld/*
+!data/raw/fallalld/.gitkeep
+
+data/processed/*
+!data/processed/.gitkeep
+outputs/
+FallAllD/

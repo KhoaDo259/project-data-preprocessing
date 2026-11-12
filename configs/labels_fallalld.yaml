@@ -1,0 +1,109 @@
+# configs/labels_fallalld.yaml
+#
+# Ánh xạ activity_id -> lớp mục tiêu (5 lớp: 0-Đứng, 1-Ngồi, 2-Đi bộ, 3-Chạy, 4-Té ngã)
+# QUY TẮC: Điền target_class (0-4) hoặc null để bỏ qua bản ghi đó.
+# Script sẽ cảnh báo và bỏ qua activity còn target_class: null khi chạy 02_build_windows.py.
+#
+# Nguồn tham khảo: FallAllD paper Table 1 (Saleh et al., Sensors 2021)
+# ADL:  activity_id 1–44  (is_fall = false)
+# Fall: activity_id 101–135 (is_fall = true, activity_id >= 100)
+#
+# Mapping đã xác nhận cho milestone tuần 8:
+#   Standing: 14, 41
+#   Sitting: 13, 42
+#   Walking: 19–22, 29–36
+#   Running: 24, 25, 43, 44
+#   Fall: 101–135
+# Các activity còn lại được giữ null và loại khỏi windows.
+
+activity_map:
+  # --- ADL (1–44) ---
+  1:   {name: "", target_class: null}
+  2:   {name: "", target_class: null}
+  3:   {name: "", target_class: null}
+  4:   {name: "", target_class: null}
+  5:   {name: "", target_class: null}
+  6:   {name: "", target_class: null}
+  7:   {name: "", target_class: null}
+  8:   {name: "", target_class: null}
+  9:   {name: "", target_class: null}
+  10:  {name: "", target_class: null}
+  11:  {name: "", target_class: null}
+  12:  {name: "", target_class: null}
+  13:  {name: "Sitting", target_class: 1}
+  14:  {name: "Standing", target_class: 0}
+  15:  {name: "", target_class: null}
+  16:  {name: "", target_class: null}
+  17:  {name: "", target_class: null}
+  18:  {name: "", target_class: null}
+  19:  {name: "Walking", target_class: 2}
+  20:  {name: "Walking", target_class: 2}
+  21:  {name: "Walking", target_class: 2}
+  22:  {name: "Walking", target_class: 2}
+  23:  {name: "", target_class: null}
+  24:  {name: "Running", target_class: 3}
+  25:  {name: "Running", target_class: 3}
+  26:  {name: "", target_class: null}
+  27:  {name: "", target_class: null}
+  28:  {name: "", target_class: null}
+  29:  {name: "Walking", target_class: 2}
+  30:  {name: "Walking", target_class: 2}
+  31:  {name: "Walking", target_class: 2}
+  32:  {name: "Walking", target_class: 2}
+  33:  {name: "Walking", target_class: 2}
+  34:  {name: "Walking", target_class: 2}
+  35:  {name: "Walking", target_class: 2}
+  36:  {name: "Walking", target_class: 2}
+  37:  {name: "", target_class: null}
+  38:  {name: "", target_class: null}
+  39:  {name: "", target_class: null}
+  40:  {name: "", target_class: null}
+  41:  {name: "Standing", target_class: 0}
+  42:  {name: "Sitting", target_class: 1}
+  43:  {name: "Running", target_class: 3}
+  44:  {name: "Running", target_class: 3}
+
+  # --- Fall (101–135, activity_id >= 100 = ngã) ---
+  101: {name: "Fall", target_class: 4}
+  102: {name: "Fall", target_class: 4}
+  103: {name: "Fall", target_class: 4}
+  104: {name: "Fall", target_class: 4}
+  105: {name: "Fall", target_class: 4}
+  106: {name: "Fall", target_class: 4}
+  107: {name: "Fall", target_class: 4}
+  108: {name: "Fall", target_class: 4}
+  109: {name: "Fall", target_class: 4}
+  110: {name: "Fall", target_class: 4}
+  111: {name: "Fall", target_class: 4}
+  112: {name: "Fall", target_class: 4}
+  113: {name: "Fall", target_class: 4}
+  114: {name: "Fall", target_class: 4}
+  115: {name: "Fall", target_class: 4}
+  116: {name: "Fall", target_class: 4}
+  117: {name: "Fall", target_class: 4}
+  118: {name: "Fall", target_class: 4}
+  119: {name: "Fall", target_class: 4}
+  120: {name: "Fall", target_class: 4}
+  121: {name: "Fall", target_class: 4}
+  122: {name: "Fall", target_class: 4}
+  123: {name: "Fall", target_class: 4}
+  124: {name: "Fall", target_class: 4}
+  125: {name: "Fall", target_class: 4}
+  126: {name: "Fall", target_class: 4}
+  127: {name: "Fall", target_class: 4}
+  128: {name: "Fall", target_class: 4}
+  129: {name: "Fall", target_class: 4}
+  130: {name: "Fall", target_class: 4}
+  131: {name: "Fall", target_class: 4}
+  132: {name: "Fall", target_class: 4}
+  133: {name: "Fall", target_class: 4}
+  134: {name: "Fall", target_class: 4}
+  135: {name: "Fall", target_class: 4}
+
+# Lớp mục tiêu (5 lớp cho TinyML ESP32-S3)
+class_names:
+  0: "Standing"
+  1: "Sitting"
+  2: "Walking"
+  3: "Running"
+  4: "Fall"

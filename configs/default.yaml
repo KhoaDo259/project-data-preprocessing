@@ -1,0 +1,48 @@
+# configs/default.yaml
+# Cấu hình mặc định cho pipeline HAR - TinyML trên ESP32-S3
+# Đọc bằng: from har.config import load_config
+
+paths:
+  data_raw: "data/raw"
+  data_processed: "data/processed"
+  outputs_figures: "outputs/figures"
+  outputs_scalers: "outputs/scalers"
+
+datasets:
+  fallalld:
+    raw_subdir: "fallalld"       # thư mục con dưới data/raw
+    waist_device: 1              # D1 = eo (xác nhận với paper FallAllD Sec 3.2)
+    file_ext: ".dat"             # 4 file riêng: _A.dat _G.dat _B.dat _M.dat
+
+  kfall:
+    raw_subdir: "kfall"
+    waist_device: null           # chỉ 1 thiết bị
+    file_ext: ".csv"
+
+  ucihar:
+    raw_subdir: "ucihar"
+    waist_device: null
+    file_ext: ".txt"
+
+  sisfall:
+    raw_subdir: "sisfall"
+    waist_device: null
+    file_ext: ".csv"
+
+pipeline:
+  target_fs: 50.0               # Hz — tần số chung sau resample
+  cutoff_hz: 20.0               # Butterworth LP cutoff (giữ động học người + xung té ngã)
+  filter_order: 4               # bậc bộ lọc
+  zero_phase: false             # causal (sosfilt) khớp firmware; true = sosfiltfilt offline
+  win_s: 2.0                    # giây / cửa sổ
+  overlap: 0.5                  # 50% overlap
+  baro_channels: true           # thêm dp, dpdt vào feature (8 kênh; false = 6 kênh IMU)
+  relative_baro_col: 6          # index cột dp trong mảng (N,8), trừ baseline đầu cửa sổ
+
+windowing:
+  fall_mode: "peak"             # "peak" = chỉ lấy cửa sổ đỉnh |acc|; "all" = mọi cửa sổ
+
+normalization:
+  method: "zscore"              # "zscore" | "minmax"
+  n_splits: 5                   # số fold GroupKFold (chốt sau khi xem phân bố nhãn)
+  random_seed: 42
